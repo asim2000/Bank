@@ -6,13 +6,25 @@ namespace Bank
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter amount");
-            int amount = Convert.ToInt32(Console.ReadLine());
-            while (amount > 0)
+            try
             {
-                int result = CashMachine.BankNote(amount);
-                Console.WriteLine(result);
-                amount -= result;
+                Console.WriteLine("Enter amount");
+                int amount = Convert.ToInt32(Console.ReadLine());
+                if (amount <= 0) throw new Exception("Amount must be greater than 0");
+                while (amount > 0)
+                {
+                    int result = CashMachine.BankNote(amount);
+                    Console.WriteLine(result);
+                    amount -= result;
+                }
+            }
+            catch (FormatException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
             }
         }
     }
